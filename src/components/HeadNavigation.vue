@@ -1,6 +1,5 @@
 <script setup>
 
-import LoginPages from "@/components/LoginPages.vue";
 </script>
 <template>
   <div class="HeadNavigation">
@@ -29,7 +28,7 @@ import LoginPages from "@/components/LoginPages.vue";
         <div class="header-Layout-right">
           <ul id="">
             <li>
-              <a href="#" @click="LoginClick()"><img id="head-portrait" :src="headImgPath" alt="登录"></a>
+              <a href="http://localhost:8080/login"><img id="head-portrait" :src="headImgPath" alt="登录"></a>
             </li>
             <li v-for="(item,index) in right_header" :key="index">
               <a :href="item.url" target="_blank">{{ item.name }}</a>
@@ -48,7 +47,6 @@ import LoginPages from "@/components/LoginPages.vue";
 <script>
 //监听事件总线
 import Bus from "@/utils/EventBus";
-
 export default {
   name: "HeadNavigation",
   data() {
@@ -71,19 +69,14 @@ export default {
     }
   }
   ,
-  methods: {
-    LoginClick() {
-      alert(666)
-      this.$emit("ClickLogin", true)
-    }
-  },
+  methods: {},
   mounted() {
     document.querySelector('.search-input').focus()
   },
   created() {
     //等待被通知登录成功
     //2.在创建的时候就进行监听
-    Bus.$on('sendMsg', (msg) => {
+    Bus.$on('sendMsg',(msg)=>{
       alert(msg)
       this.headImgPath = require('@/assets/logo.png')
     })

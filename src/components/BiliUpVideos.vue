@@ -7,6 +7,8 @@ import BasseVideos from "@/components/BasseVideos.vue";
 <div class="BiliUpVideos">
   <ul>
     <BasseVideos class="biliUpVideos" v-for="item in 6" :key="item"></BasseVideos>
+
+
   </ul>
 
 </div>
