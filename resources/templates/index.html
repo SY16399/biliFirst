@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>B站大会员权益-哔哩哔哩大会员开通-哔哩哔哩视频官网</title>
+    <link rel="stylesheet" href="css/header.css" type="text/css" />
+    <link rel="stylesheet" href="css/2.css" type="text/css">
+</head>
+<body>
+   <div class="HeadNavigation">
+    <header id="header-Layout">
+        <!-- 左边部分 -->
+        <nav>
+            <div class="header-Layout-left">
+                <ul id="left_url">
+                    <li v-for="(item,index) in left_header" :key="index">
+                        <a  :href="item.url" target="_blank">{{item.name}}</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 中间部分 -->
+        <div class="search-bar">
+
+                <form  action="">
+                    <input class="search-input" type="text" value="" placeholder="歪嘴战神在b站恰饭的日子" />
+                    <button class="search-button" value="" >搜索</button>
+                </form>
+        </div>
+
+        <!-- 右边部分 -->
+        <nav>
+            <div class="header-Layout-right">
+                <ul id="">
+                    <li>
+                        <a href="http://localhost:8080/login"><img id="head-portrait" src="picture/no_loader.png"   ></a>
+                    </li>
+                    <li v-for="(item,index) in right_header" :key="index">
+                        <a :href="item.url" target="_blank">{{item.name}}</a>
+                    </li>
+                    <button id="head-contribute"><a href="https://member.bilibili.com/v2#/upload/video/frame">投稿</a></button>
+                </ul>
+            </div>
+        </nav>
+    </header>
+   </div>
+   <div class="mkground-height">
+
+   </div>
+
+    <main>
+        <!-- 主要内容区域 -->
+        <h1>页面主要内容</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor nunc non tortor fermentum, vitae finibus lorem fringilla.</p>
+        <!-- 其他内容 -->
+    </main>
+
+    <footer>
+        <!-- 页脚 -->
+        <p>版权信息  2023 导航栏示例</p>
+    </footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:'#header-Layout',
+        data:{
+          left_header:[{url:'' ,name:'主站'},
+              {url:''  ,name:'番剧'},
+              {url:'' ,name:'游戏中心'},
+              {url:'' , name:'直播'},
+              {url:'' ,name:'漫画'},
+              {url:'',name:'下载APP'}],
+            right_header:[{url:'' ,name:'大会员'},
+                {url:'' ,name:'消息'},
+                {url:'' ,name:'动态'},
+                {url:'' ,name:'收藏'},
+                {url:'' ,name:'历史'},
+                {url:'' ,name:'创作中心'},
+                /*{url:'' ,name:'投稿'}*/]
+        }
+    })
+    app.nickname = 'shenyang'
+</script>
+</body>
+</html>

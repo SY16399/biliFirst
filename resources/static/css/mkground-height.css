@@ -1,0 +1,6 @@
+.mkground-height{
+    position: fixed;
+    height: 1200px;
+    width: 100%;
+    background-image: url("../picture/most_header.gif");
+}
