@@ -3,10 +3,10 @@
 </script>
 
 <template>
+<!--  在BootStrap中 model可以出现弹窗-->
   <div class="login-container">
 
-    <div class="login-form">
-
+    <div class="login-form ">
       <h2>Login</h2>
       <div class="alert " role="alert">
         提示消息
@@ -15,6 +15,7 @@
       <input type="password" class="password" placeholder="Password" required>
       <button type="button" @click="submitForm()">Login{{ftoken}}</button>
     </div>
+
   </div>
 </template>
 <script>
@@ -198,6 +199,7 @@ export default {
   align-items: center;
   height: 100vh;
   background-color: skyblue;
+  //background-color: rgba(0, 0, 0, 0.5);
 }
 
 .login-form {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HeadNavigation class="HeadNavigation"/>
+    <HeadNavigation class="HeadNavigation" @ClickLogin="LoginClick()"/>
 <!--    <BiliShortcut/>
     <BiliBanner ></BiliBanner>
     <BiliUpVideos></BiliUpVideos>
@@ -32,7 +32,6 @@ export default {
   },
   data(){
     return{
-
       ftoken:'1',
       isSuccessLogin:false,
     }
@@ -42,7 +41,12 @@ export default {
     SuccessLogin(newLoginState,token){
       this.isSuccessLogin = newLoginState;
       this.ftoken = token;
+      //TODO
       alert(token)
+    },
+    //登录按钮被点击
+    LoginClick(){
+
     }
 }
 }
