@@ -6,10 +6,14 @@
     <BiliUpVideos></BiliUpVideos>
 
     <BottomVideos></BottomVideos>-->
-<!--    /传数据-->
-    <LoginPages :ftoken="ftoken" @LoginSuccess="SuccessLogin()"  />
+    <!-- 传数据   登录与注册-->
+<!--    <LoginPages :ftoken="ftoken" @LoginSuccess="SuccessLogin()"  />
     <p> {{isSuccessLogin}}：{{ftoken}} </p>
-<!--    <RegisterPages></RegisterPages>-->
+    <RegisterPages></RegisterPages>-->
+<!--<LoginAndRegister></LoginAndRegister>-->
+
+  <!--    文件传输-->
+  <FileLoad></FileLoad>
   </div>
 </template>
 
@@ -20,15 +24,18 @@ import BiliBanner from "@/components/BiliBanner.vue";
 import BiliUpVideos from "@/components/BiliUpVideos.vue";
 import BottomVideos from "@/components/BottomVideos.vue";*/
 
+import FileLoad from "@/components/File/FileLoad.vue";
+
 export default {
   name: 'App',
   //局部注册
   components: {
+    FileLoad
 
-/*    BottomVideos,
-    BiliBanner,
-    BiliShortcut,
-    BiliUpVideos,*/
+    /*    BottomVideos,
+        BiliBanner,
+        BiliShortcut,
+        BiliUpVideos,*/
   },
   data(){
     return{
@@ -39,10 +46,11 @@ export default {
   },
   //登录成功处理数据
   methods:{
-    SuccessLogin(newLoginState,token){
-      this.isSuccessLogin = newLoginState;
-      this.ftoken = token;
-      alert(token)
+    SuccessLogin(isSuccessLogin){
+      this.isSuccessLogin = isSuccessLogin;
+      //this.ftoken = token;
+      this.ftoken = localStorage.getItem('token')
+      alert(this.ftoken)
     }
 }
 }

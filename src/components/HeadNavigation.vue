@@ -23,12 +23,14 @@
         </form>
       </div>
 
+      <!--data-bs-toggle="modal" data-bs-target="#LoginPages"   登录框显示，暂时现写上 href="#"  开发其他组件-->
+      <a class="btn btn-primary" href="#"><img id="head-portrait" :src="headImgPath" alt="登录"></a>
       <!-- 右边部分 -->
       <nav>
         <div class="header-Layout-right">
           <ul id="">
             <li>
-              <a href="http://localhost:8080/login"><img id="head-portrait" :src="headImgPath" alt="登录"></a>
+
             </li>
             <li v-for="(item,index) in right_header" :key="index">
               <a :href="item.url" target="_blank">{{ item.name }}</a>
@@ -47,6 +49,7 @@
 <script>
 //监听事件总线
 import Bus from "@/utils/EventBus";
+
 export default {
   name: "HeadNavigation",
   data() {
@@ -76,8 +79,9 @@ export default {
   created() {
     //等待被通知登录成功
     //2.在创建的时候就进行监听
-    Bus.$on('sendMsg',(msg)=>{
-      alert(msg)
+    Bus.$on('sendMsg', (msg) => {
+      //alert("被发送消息"+msg)
+      console.log("HeadNavigation:" + "被发送消息" + msg)
       this.headImgPath = require('@/assets/logo.png')
     })
   }
@@ -116,12 +120,13 @@ body {
 }
 
 .header-Layout-left {
-
+  margin-top: 20px;
   width: 100%;
 
 }
 
 .header-Layout-right {
+  margin-top: 20px;
   width: 100%;
 }
 
@@ -133,6 +138,11 @@ nav div ul {
 
 nav div ul li {
   margin-right: 15px;
+}
+
+nav div ul li:hover {
+  background: #F6F7F8;
+  height: 30px;
 }
 
 nav div ul li a {
@@ -155,16 +165,23 @@ nav div ul li a {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background: #F6F7F8;
+  margin-top: 20px;
   /*border: 1px solid #ccc;*/
 }
 
+.btn {
+  background: none;
+  border: none;
+  margin-top: 10px;
+}
+
 .search-bar input:hover {
+
   background: white;
 }
 
 .search-bar button {
   width: 15%;
-  padding: 0px;
   height: 30px;
   float: right;
   border-radius: 4px;
@@ -172,7 +189,8 @@ nav div ul li a {
   background-color: #00a1d6;
   color: #fff;
   position: relative;
-  top: -2.5px;
+  top: 15px;
+
 }
 
 .search-bar button:hover {
@@ -180,7 +198,7 @@ nav div ul li a {
 }
 
 #upload {
-  background: pink;
+  background: #ee97b3;
 }
 
 #head-portrait {
