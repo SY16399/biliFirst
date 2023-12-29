@@ -22,6 +22,10 @@ import 'bootstrap/dist/js/bootstrap.esm.js';
 import LoginAndRegister from "@/components/LoginAndRegister.vue";
 Vue.component('LoginAndRegister',LoginAndRegister)
 // import 'bootstrap/dist/js/bootstrap.js'
+
+//文件传输
+import FileLoad from "@/components/File/FileLoad.vue";
+Vue.component('FileLoad',FileLoad)
 new Vue({
   el: '#app',
   render: (createElement) =>{

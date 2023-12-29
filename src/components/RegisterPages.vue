@@ -1,5 +1,5 @@
 <script setup>
-
+//注册页组件
 </script>
 
 <template>

@@ -27,7 +27,7 @@
 </template>
 <script>
 import axios from "axios";
-
+import ImgToTest from "@/utils/ImgToTest";
 export default {
   mounted() {
       //this.uploadFile()
@@ -36,6 +36,12 @@ export default {
     return {}
   },
   methods: {
+    //设置该文件的url 测试 TODO
+    sendImgUri(URI){
+      ImgToTest.$emit('sendImgUri',URI)
+    },
+
+    //设置文件就会传输文件
     uploadFileInput() {
       //文件选择元素->change改变事件
       document.querySelector('#upload_single_file').addEventListener('change', evt => {
@@ -56,7 +62,9 @@ export default {
         method: 'POST',
         data: fd,
       }).then(result => {
-        console.log(result.data.code + " " + result.data.message+" "+result.data.data.fileDownLoadUri)
+        const URI = result.data.data.fileDownLoadUri;
+        this.sendImgUri(URI)
+        console.log(result.data.code + " " + result.data.message+" "+URI)
       }).catch(error => {
         //alert(666)
         //console.log(error)

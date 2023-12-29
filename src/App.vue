@@ -11,9 +11,14 @@
     <p> {{isSuccessLogin}}：{{ftoken}} </p>
     <RegisterPages></RegisterPages>-->
 <!--<LoginAndRegister></LoginAndRegister>-->
-
+<!--    This is a Test-->
+<!--  <FileToLoadTest></FileToLoadTest>-->
   <!--    文件传输-->
-  <FileLoad></FileLoad>
+<!--  <FileLoad></FileLoad>-->
+
+<!--    //用户信息修改-->
+    <UserInfoSetPage></UserInfoSetPage>
+
   </div>
 </template>
 
@@ -24,13 +29,19 @@ import BiliBanner from "@/components/BiliBanner.vue";
 import BiliUpVideos from "@/components/BiliUpVideos.vue";
 import BottomVideos from "@/components/BottomVideos.vue";*/
 
-import FileLoad from "@/components/File/FileLoad.vue";
+
+// import FileToLoadTest from "@/components/File/FileToLoadTest.vue";
+
+
+import UserInfoSetPage from "@/components/UserInfo/UserInfoSetPage.vue";
 
 export default {
   name: 'App',
   //局部注册
   components: {
-    FileLoad
+    UserInfoSetPage
+
+    // FileToLoadTest
 
     /*    BottomVideos,
         BiliBanner,

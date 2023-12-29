@@ -1,12 +1,12 @@
 <script setup>
-
-import BasseVideos from "@/components/BasseVideos.vue";
+//这是左侧视频组件
+import BaseVideos from "@/components/BaseVideos.vue";
 </script>
 
 <template>
 <div class="BiliUpVideos">
   <ul>
-    <BasseVideos class="biliUpVideos" v-for="item in 6" :key="item"></BasseVideos>
+    <BaseVideos class="biliUpVideos" v-for="item in 6" :key="item"></BaseVideos>
 
 
   </ul>

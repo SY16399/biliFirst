@@ -1,5 +1,5 @@
 <script setup>
-
+//这是最上方导航栏组件
 </script>
 <template>
   <div class="HeadNavigation">

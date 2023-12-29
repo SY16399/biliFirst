@@ -1,5 +1,5 @@
 <script setup>
-
+//左侧轮播图组件
 </script>
 
 <template>

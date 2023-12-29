@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<div class="BasseVideos">
+<div class="BaseVideos">
   <video width="225px" height="85%" autostart="true" loop="loop" controls>
     <source src="../assets/MP4.mp4" type="video/mp4"/>
   </video><br>
@@ -12,7 +12,7 @@
 </template>
 
 <style scoped>
-  .BasseVideos{
+  .BaseVideos{
     margin-top: 1%;
     border-radius: 4px;
     height: 48%;
