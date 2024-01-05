@@ -24,7 +24,9 @@
       <div class="content">
         <div class="info-wrap">
           <h3 class="title">基本设置</h3>
-          <form class="user-form" action="javascript:;">
+          <!--    action="javascript:;"    改由javaScript控制-->
+          <!--    onsubmit="return false;" 禁止了表单的默认跳转，和默认提交行为-->
+          <form class="user-form" >
             <div class="form-item">
               <label for="email">邮箱</label>
               <input id="email" name="email" class="email" type="text" placeholder="请输入邮箱" autocomplete="off">
@@ -49,14 +51,14 @@
               <textarea id="desc" name="desc" class="desc" placeholder="请输入个人签名" cols="20" rows="10"
                         autocomplete="off"></textarea>
             </div>
-            <button class="submit">提交</button>
+            <button class="submit" @click="submitUserInfo()">提交</button>
           </form>
         </div>
         <div class="avatar-box">
           <h4 class="avatar-title">头像</h4>
-          <img class="prew" src="@/assets/picture/userHandler/头像.png" alt="">
-          <label for="upload">更换头像</label>
-          <input id="upload" type="file" class="upload" >
+          <img class="prew" :src="avatar" alt="">
+          <label for="uploadAvatar">更换头像</label>
+          <input id="uploadAvatar" type="file" @change="upAvatar" class="upload">
         </div>
 
       </div>
@@ -66,8 +68,140 @@
 <script>
 // import axios from "axios";
 
-export default {
+import axios from "axios";
+import {serialize} from '@/assets/lib/form-serialize'
 
+export default {
+  data() {
+    return {
+      isLogin: true,
+      userinfo: null,
+      avatar: require('@/assets/picture/userHandler/头像.png')//解析成本地的样式
+    }
+  },
+  created() {
+    //如果未登录，跳转到登录页
+    if (!this.isLogin) {
+      //location.href = "/api/login"
+    } else {
+      //渲染异步信息
+      this.rendererUser();
+    }
+
+  },
+  methods: {
+    //1.提交修改的用户信息
+    submitUserInfo() {
+      //2.收集表单信息
+      const userFrom = document.querySelector('.user-form')
+      //使用 serialize 插件得到多个表单数据,拿到最终的json对象
+      const userObject = serialize(userFrom, {hash: true, empty: true})
+      //3.提交到服务器保存
+      //3.1性别数字字符串转成数字类型
+      userObject.gender = + userObject.gender
+      console.log(userObject)
+      //3.2.axios提交数据
+      const token = localStorage.getItem('token');
+      axios({
+        url:'/api/updateMyInfo',
+        method:'PUT',
+        headers: {'token': token},
+        data:userObject
+      }).then(result  =>{
+        console.log(result.data.code + " " + result.data.message)
+      }).catch(e=>{
+        console.log(e)
+      })
+
+    },
+    upAvatar() {
+      //alert(666)
+      const fileInput = document.getElementById('uploadAvatar')
+      const file = fileInput.files[0];
+      this.submitFile(file)
+    },
+    submitFile(file) {
+      //2.使用FormData携带图片文件
+      const fd = new FormData()
+      fd.append('uploadAvatar', file)
+      //3.基于axios将表单数据提交给服务其
+      const token = localStorage.getItem('token');
+      axios({
+        url: '/api/uploadAvatar',
+        method: 'POST',
+        headers: {'token': token},
+        data: fd,
+      }).then(result => {
+        const URI = result.data.data;
+        this.avatar = URI
+        console.log(result.data.code + " " + result.data.message + " " + URI)
+      }).catch(error => {
+        //alert(666)
+        //console.log(error)
+        // 处理登录失败的逻辑
+        //this.alertFn(error.response, false)
+
+        console.log(error) // 输出错误的响应信息
+      });
+    },
+    //渲染用户信息
+    async rendererUser() {
+      //1.如果登录，获取用户信息
+      const token = localStorage.getItem('token');
+      await this.getUserInfo(token)
+      //2.回显信息到标签上
+      this.echoUserInfo(this.userinfo)
+    },
+
+    //回显信息到标签上
+    echoUserInfo(userinfo) {
+      //拿到用户对象
+      const userObject = userinfo
+      //遍历每一个属性
+      Object.keys(userObject).forEach(key => {
+        if (key === 'avatar') {
+          //头像不为空更新
+          //console.log(userObject[key]+"cscscsc")
+          userObject[key] && (this.avatar = userObject[key])
+        } else if (key === 'gender') {
+          //获取性别单选框
+          const gRadioList = document.querySelectorAll('.gender')
+          //获取性别的数字 0男，1女
+          const gNum = userObject[key];
+          //通过性别数字，作为下标，找到对应的单选框，设置选中状态
+          gRadioList[gNum].checked = true
+        } else {
+          // console.log(key)
+          //赋予默认值
+          var item = document.querySelector(`.${key}`);
+          if (item != null)//很重要，作用是由于对应的标签和属性不一致，所以key不对应标签属性会有null，设置成null预防报错
+            item.value = userObject[key]
+          //包含了input data 对应，特殊：data的value 必须是yyyy-MM-dd形式
+          // console.log(item)
+        }
+        // console.log(key)
+      })
+
+    },
+
+    //利用token请求用户信息 标记为异步函数
+    async getUserInfo(token) {
+      //用户登录信息 等待执行完成
+      await axios({
+        url: '/api/getUserInfo',
+        method: 'GET',
+        headers: {'token': token}
+      }).then((response) => {
+        const userinfo = response.data.data
+        console.log(userinfo)
+        this.userinfo = userinfo
+      }).catch(error => {
+        console.log(error + " " + "")
+        this.isLogin = false
+      })
+    },
+
+  }
 }
 </script>
 <style scoped>
@@ -179,7 +313,7 @@ export default {
   background: #fff;
 }
 
-.content .avatar-box #upload {
+.content .avatar-box #uploadAvatar {
   display: none;
 }
 

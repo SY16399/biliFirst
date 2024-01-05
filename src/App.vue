@@ -6,15 +6,15 @@
     <BiliUpVideos></BiliUpVideos>
 
     <BottomVideos></BottomVideos>-->
-    <!-- 传数据   登录与注册-->
+    <!-- 传数据   登录与注册  按钮需要需改-->
 <!--    <LoginPages :ftoken="ftoken" @LoginSuccess="SuccessLogin()"  />
     <p> {{isSuccessLogin}}：{{ftoken}} </p>
     <RegisterPages></RegisterPages>-->
 <!--<LoginAndRegister></LoginAndRegister>-->
 <!--    This is a Test-->
-<!--  <FileToLoadTest></FileToLoadTest>-->
-  <!--    文件传输-->
-<!--  <FileLoad></FileLoad>-->
+<!--  <FileToLoadTest></FileToLoadTest>
+&lt;!&ndash;      文件传输&ndash;&gt;
+  <FileLoad></FileLoad>-->
 
 <!--    //用户信息修改-->
     <UserInfoSetPage></UserInfoSetPage>
@@ -43,7 +43,7 @@ export default {
 
     // FileToLoadTest
 
-    /*    BottomVideos,
+/*        BottomVideos,
         BiliBanner,
         BiliShortcut,
         BiliUpVideos,*/

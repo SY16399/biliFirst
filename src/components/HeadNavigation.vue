@@ -24,7 +24,7 @@
       </div>
 
       <!--data-bs-toggle="modal" data-bs-target="#LoginPages"   登录框显示，暂时现写上 href="#"  开发其他组件-->
-      <a class="btn btn-primary" href="#"><img id="head-portrait" :src="headImgPath" alt="登录"></a>
+      <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#LoginPages"><img id="head-portrait" :src="headImgPath" alt="登录"></a>
       <!-- 右边部分 -->
       <nav>
         <div class="header-Layout-right">
