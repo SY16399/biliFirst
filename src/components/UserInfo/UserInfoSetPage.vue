@@ -6,6 +6,7 @@
 <template>
   <div class="most">
     <!-- toast 提示框 -->
+    <!--    bootstrap提示框 toast  data-bs-delay 多长时间消失-->
     <div class="toast my-toast" data-bs-delay="1500">
       <div class="toast-body">
         <div class="alert alert-success info-box">
@@ -26,7 +27,7 @@
           <h3 class="title">基本设置</h3>
           <!--    action="javascript:;"    改由javaScript控制-->
           <!--    onsubmit="return false;" 禁止了表单的默认跳转，和默认提交行为-->
-          <form class="user-form" >
+          <form class="user-form" action="javascript:;">
             <div class="form-item">
               <label for="email">邮箱</label>
               <input id="email" name="email" class="email" type="text" placeholder="请输入邮箱" autocomplete="off">
@@ -70,7 +71,7 @@
 
 import axios from "axios";
 import {serialize} from '@/assets/lib/form-serialize'
-
+import { Toast } from 'bootstrap'
 export default {
   data() {
     return {
@@ -98,22 +99,38 @@ export default {
       const userObject = serialize(userFrom, {hash: true, empty: true})
       //3.提交到服务器保存
       //3.1性别数字字符串转成数字类型
-      userObject.gender = + userObject.gender
+      userObject.gender = +userObject.gender
       console.log(userObject)
       //3.2.axios提交数据
       const token = localStorage.getItem('token');
       axios({
-        url:'/api/updateMyInfo',
-        method:'PUT',
+        url: '/api/updateMyInfo',
+        method: 'PUT',
         headers: {'token': token},
-        data:userObject
-      }).then(result  =>{
-        console.log(result.data.code + " " + result.data.message)
-      }).catch(e=>{
+        data: userObject
+      }).then(result => {
+        const code = result.data.code
+        console.log(code + " " + result.data.message)
+        if (code === '200'){
+          this.toastShow()
+          setTimeout(()=>{
+            window.location.reload(); // 刷新当前页面
+          },2000)
+
+        }
+      }).catch(e => {
         console.log(e)
       })
 
     },
+    //显示提示框
+    toastShow(){
+      const toastDom = document.querySelector('.my-toast')
+      const toast = new Toast(toastDom)
+      //alert(666)
+      toast.show()
+    }
+    ,
     upAvatar() {
       //alert(666)
       const fileInput = document.getElementById('uploadAvatar')
@@ -410,7 +427,7 @@ textarea:focus {
 
 .toast {
   position: fixed;
-  top: 20px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
 }
